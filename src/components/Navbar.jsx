@@ -4,29 +4,44 @@ import { NavLink } from 'react-router-dom'
 
 function Navbar() {
  
+  
   return (
-    <div className='flex flex-row gap-[3rem] text-bold border rounded-md justify-center mb-[1rem] w-full h-[45px] items-center p-4 bg-gray-800'>
-      
-        <NavLink to='/'
-            className={({isActive}) =>
-                isActive
-                  ? "text-blue-500 font-semibold text-3xl"
-                  : "text-white font-medium text-2xl"
-            }
-        >
-            Home
-        </NavLink>
-        <NavLink to='/pastes'
-            className={({isActive}) =>
-              isActive
-                ? "text-blue-500 font-semibold text-3xl"
-                : "text-white font-medium text-2xl"
-            }
-        >
-            Pastes
-        </NavLink>
+  <nav className="w-full bg-gradient-to-r from-slate-900 via-gray-900 to-slate-900
+  border border-gray-700 rounded-xl mb-4 shadow-lg">
+
+    <div className="flex items-center justify-center gap-10 h-14 px-6">
+
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `relative transition-all duration-300 ${
+            isActive
+              ? "text-indigo-400 font-semibold text-lg after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[2px] after:bg-indigo-400"
+              : "text-gray-200 text-base hover:text-indigo-300"
+          }`
+        }
+      >
+        Home
+      </NavLink>
+
+      <NavLink
+        to="/pastes"
+        className={({ isActive }) =>
+          `relative transition-all duration-300 ${
+            isActive
+              ? "text-indigo-400 font-semibold text-lg after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[2px] after:bg-indigo-400"
+              : "text-gray-200 text-base hover:text-indigo-300"
+          }`
+        }
+      >
+        Pastes
+      </NavLink>
+
     </div>
-  )
+  </nav>
+)
+
 }
 
 export default Navbar
+

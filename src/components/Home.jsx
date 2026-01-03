@@ -71,65 +71,87 @@ function Home() {
 
 
   return (
-    <div className='w-full h-full py-2 max-w-[900px] mx-auto px-5 lg:px-0'>
-      <div className='flex flex-col gap-y-2 items-start' >
-        <div className='flex flex-row gap-5 place-content-between w-full'>
+    <div className="min-h-screen w-full bg-gradient-to-br from-slate-950 via-zinc-900 to-slate-900 
+    px-3 sm:px-6 py-6 flex justify-center">
+
+      <div className="w-full max-w-5xl bg-zinc-900/80 backdrop-blur-xl 
+      rounded-2xl shadow-2xl border border-zinc-700/50 p-4 sm:p-6">
+
+        {/* Top Controls */}
+        <div className="flex flex-col lg:flex-row gap-3 w-full">
+
           <input
-            className={`p-3 rounded-md mt-2 pl-5 text-white border border-input 
-            ${pasteId ? 'w-[80%]' : 'w-[85%]'}`}
             type="text"
-            placeholder="Enter Title Here...."
+            placeholder="Paste title..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            className="w-full lg:flex-1 px-4 py-3 rounded-xl 
+            bg-zinc-800 text-white border border-zinc-700
+            focus:ring-2 focus:ring-indigo-500 outline-none
+            transition placeholder:text-zinc-400"
           />
 
-          <button
-            onClick={createPaste}
-            className='p-3 rounded-md mt-2 bg-blue-600 hover:bg-blue-700 focus:ring-blue-300 font-medium text-white min-w-[150px] w-[210px] dark:bg-blue-600 dark:hover:bg-blue-700'>
-            {pasteId ? "Update Paste" : "Create Paste"}
-          </button>
-              {
-                pasteId && <button
-                    className='text-white bg-blue-700 focus:ring-4 focus: ring-blue-300 font-medium rounded-lg h-[55px] mt-[0.5rem] '
-                    onClick={resetPate}
-                >
-                    <PlusCircle size={27}/>
-                </button>
-              }
+          <div className="flex gap-3 w-full lg:w-auto">
+            <button
+              onClick={createPaste}
+              className="w-full lg:w-auto px-6 py-3 rounded-xl font-semibold text-white
+              bg-gradient-to-r from-indigo-600 to-violet-600
+              hover:from-indigo-500 hover:to-violet-500
+              focus:ring-2 focus:ring-indigo-400 transition"
+            >
+              {pasteId ? "Update" : "Create"}
+            </button>
 
-        </div>
-
-          <div className='w-full rounded-t flex items-center justify-between gap-x-4 px-4 py-2 border-b border-[rgba(128,121,121,0.3)] first-letter: mt-4 min-w-[400px] p-4 bg-gray-500 mb-0 border'>
-              <div className='w-full flex gap-x-[6px] items-center select-none group'>
-                  <div className='w-[13px] h-[13px] rounded-full flex items-center justify-center p-[1px] overflow-hidden bg-[rgba(255,95,87)]'></div>
-                  <div className='w-[13px] h-[13px] rounded-full flex items-center justify-center p-[1px] overflow-hidden bg-[rgba(254,188,46)]'></div>
-                  <div className='w-[13px] h-[13px] rounded-full flex items-center justify-center p-[1px] overflow-hidden bg-[rgba(45,200,66)]'></div>
-              </div>
-              <div className='w-fit rounded-t flex items-center justify-between gap-x-4 px-'>
-                  <Copy 
-                    className='flex justify-center items-center transition-all duration-300 ease-in-out group'
-                    onClick = {() =>{
-                      navigator.clipboard.writeText(value);
-                      toast.success('Copied to Clipboard',{
-                         position:'top-right',
-                      });
-                    }}
-                  />
-              </div>
+            {pasteId && (
+              <button
+                onClick={resetPate}
+                className="px-4 py-3 rounded-xl bg-zinc-800 text-white
+                hover:bg-zinc-700 transition flex items-center justify-center"
+              >
+                <PlusCircle size={22} />
+              </button>
+            )}
           </div>
-          <textarea
-            className='mt-[-7px] rounded min-w-[500px] text-white p-4 w-[900px] focus-visible:ring-0 resize-none '
-            value={value}
-            placeholder='Enter the Content here.....'
-            onChange={(e) => setValue(e.target.value)}
-            style={{
-                caretColor: '#000'
+        </div>
+
+        {/* Editor Header */}
+        <div className="mt-5 flex items-center justify-between 
+        bg-zinc-800/70 rounded-t-xl px-4 py-3 border border-zinc-700">
+
+          <div className="flex gap-2">
+            <span className="w-3 h-3 rounded-full bg-red-500"></span>
+            <span className="w-3 h-3 rounded-full bg-yellow-400"></span>
+            <span className="w-3 h-3 rounded-full bg-green-500"></span>
+          </div>
+
+          <Copy
+            className="text-zinc-300 cursor-pointer 
+            hover:text-indigo-400 transition"
+            onClick={() => {
+              navigator.clipboard.writeText(value)
+              toast.success("Copied!", { position: "top-right" })
             }}
-            rows={20}
           />
         </div>
+
+        {/* Textarea */}
+        <textarea
+          rows={14}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Start writing your paste..."
+          className="w-full rounded-b-xl bg-zinc-800/80 text-white
+          p-4 sm:p-5 border border-t-0 border-zinc-700
+          resize-none outline-none
+          focus:ring-2 focus:ring-indigo-500 transition
+          placeholder:text-zinc-400"
+        />
+
       </div>
+    </div>
   )
 }
+
+
 
 export default Home
