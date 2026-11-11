@@ -1,16 +1,25 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import * as authApi from '../api/auth';
 
 const AuthContext = createContext(null);
 
 const TOKEN_KEY = 'accessToken';
+const USER_KEY = 'currentUser';
 const PENDING_EMAIL_KEY = 'pendingEmail';
 
 export function AuthProvider({ children }) {
     const [accessToken, setAccessToken] = useState(
         () => localStorage.getItem(TOKEN_KEY) || null
     );
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(() => {
+        try {
+            const saved = localStorage.getItem(USER_KEY);
+            return saved ? JSON.parse(saved) : null;
+        } catch {
+            return null;
+        }
+    });
     const [loading, setLoading] = useState(false);
 
     const saveToken = useCallback((token) => {
@@ -20,6 +29,16 @@ export function AuthProvider({ children }) {
         } else {
             localStorage.removeItem(TOKEN_KEY);
             setAccessToken(null);
+        }
+    }, []);
+
+    const saveUser = useCallback((userData) => {
+        if (userData) {
+            localStorage.setItem(USER_KEY, JSON.stringify(userData));
+            setUser(userData);
+        } else {
+            localStorage.removeItem(USER_KEY);
+            setUser(null);
         }
     }, []);
 
@@ -39,10 +58,10 @@ export function AuthProvider({ children }) {
         async (credentials) => {
             const data = await authApi.login(credentials);
             saveToken(data.accessToken);
-            setUser(data.user);
+            saveUser(data.user);
             return data;
         },
-        [saveToken]
+        [saveToken, saveUser]
     );
 
     const register = useCallback(
@@ -60,14 +79,22 @@ export function AuthProvider({ children }) {
         return data;
     }, [setPendingEmail]);
 
+    const resendOtp = useCallback(async (email) => {
+        return await authApi.resendOtp({ email });
+    }, []);
+
     const fetchMe = useCallback(
         async (token = accessToken) => {
             if (!token) return null;
-            const data = await authApi.getMe(token);
-            setUser(data.user);
-            return data.user;
+            try {
+                const data = await authApi.getMe(token);
+                saveUser(data.user);
+                return data.user;
+            } catch {
+                return null;
+            }
         },
-        [accessToken]
+        [accessToken, saveUser]
     );
 
     const refreshAccessToken = useCallback(async () => {
@@ -83,8 +110,8 @@ export function AuthProvider({ children }) {
             /* clear local state even if server logout fails */
         }
         saveToken(null);
-        setUser(null);
-    }, [saveToken]);
+        saveUser(null);
+    }, [saveToken, saveUser]);
 
     const logoutAll = useCallback(async () => {
         try {
@@ -93,8 +120,8 @@ export function AuthProvider({ children }) {
             /* clear local state even if server logout fails */
         }
         saveToken(null);
-        setUser(null);
-    }, [saveToken]);
+        saveUser(null);
+    }, [saveToken, saveUser]);
 
     const value = useMemo(
         () => ({
@@ -105,6 +132,7 @@ export function AuthProvider({ children }) {
             login,
             register,
             verifyEmail,
+            resendOtp,
             fetchMe,
             refreshAccessToken,
             logout,
@@ -120,6 +148,7 @@ export function AuthProvider({ children }) {
             login,
             register,
             verifyEmail,
+            resendOtp,
             fetchMe,
             refreshAccessToken,
             logout,

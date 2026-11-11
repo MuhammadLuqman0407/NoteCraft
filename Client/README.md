@@ -30,4 +30,6 @@ A beautiful, responsive note-taking application built with React, Redux, and Tai
 
 *Let your creativity flow and capture every brilliant idea!* ✨
 
+-- Scope - (add backend) --- 
+
 

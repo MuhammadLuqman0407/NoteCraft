@@ -1,22 +1,16 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeFromPastes } from '../redux/pasteSlice';
-import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { v4 as uuidv4 } from "uuid";
 import { Link } from 'react-router-dom';
-import { Calendar, Copy, Dice1, Eye, PencilLine, Trash2, Share2 } from 'lucide-react';
-// import {forward} from 'lucide-react'
+import { Calendar, Copy, Eye, PencilLine, Trash2, Share2 } from 'lucide-react';
 import { FormatDate } from '../utlis/formatDate'
-
-const id = uuidv4();
 
 const Paste = () => {
 
     const pastes = useSelector((state) => state.paste.pastes);
     const [searchTerm, setSearchTerm] = useState('');
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     function handleDelete(pasteId) {
         dispatch(removeFromPastes(pasteId));
@@ -30,14 +24,14 @@ const Paste = () => {
             const shareLink = `${window.location.origin}/pastes/${paste.id}`;
             await navigator.clipboard.writeText(shareLink);
             toast.success('Share link copied to clipboard!');
-        } catch (error) {
+        } catch {
             toast.error('Failed to copy link');
         }
     };
     return (
-        <div className='w-full min-w-[1200px] flex flex-col gap-3 px-4 py-1 rounded-[0.3rem] border border-[rgba(235,231,231,0.51)] mt-6'>
+        <div className='w-full max-w-5xl mx-auto flex flex-col gap-3 px-4 py-1 rounded-[0.3rem] border border-[rgba(235,231,231,0.2)] mt-6'>
             <input
-                className='mt-2 rounded-2xl min-w-[600px] pl-7 p-4 focus:outline-none w-full bg-transparen border-gray-300'
+                className='mt-2 rounded-2xl w-full pl-7 p-4 focus:outline-none bg-slate-900 border border-slate-700 text-slate-100'
                 type='search'
                 placeholder='Search Here....'
                 value={searchTerm}

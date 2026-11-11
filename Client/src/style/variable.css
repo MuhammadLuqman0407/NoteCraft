@@ -1,57 +1,82 @@
-:root {
-    /* Brand palette */
+\/* NoteCraft / Noted Design Tokens */:root,
+[data-theme="light"] {
+    --theme-bg: #f5f2eb;
+    --theme-bg-gradient: radial-gradient(circle at 50% 15%, #fdfbf7 0%, #ece5d8 100%);
+
+    /* 3-Column Surfaces */
+    --sidebar-bg: #f9f7f2;
+    --sidebar-border: #e9e4d9;
+    --notelist-bg: #f3efe6;
+    --notelist-border: #e4ded2;
+    --editor-bg: #ffffff;
+    --editor-border: #e2dcd0;
+
+    /* Card & Active States */
+    --card-bg: #ffffff;
+    --card-border: #e5dfd3;
+    --card-active-bg: #ffedd5;
+    --card-active-border: #fed7aa;
+
+    /* Brand & Accent */
+    --color-primary: #c2410c;
+    --color-primary-light: #ea580c;
+    --color-primary-dark: #9a3412;
+    --color-secondary: #d97706;
+    --text-accent: #c2410c;
+
+    /* Text Hierarchy */
+    --text-primary: #1c1917;
+    --text-secondary: #57534e;
+    --text-muted: #8c857b;
+
+    /* Button Tokens */
+    --btn-primary-bg: #c2410c;
+    --btn-primary-hover: #9a3412;
+    --btn-primary-text: #ffffff;
+
+    /* Window Controls */
+    --dot-red: #e05338;
+    --dot-yellow: #e59344;
+    --dot-green: #9b704f;
+}
+
+[data-theme="dark"] {
+    --theme-bg: #0b0f19;
+    --theme-bg-gradient: radial-gradient(circle at 15% 15%, #0f0c29 0%, #0b0f19 55%);
+
+    /* 3-Column Surfaces */
+    --sidebar-bg: #0d1322;
+    --sidebar-border: #1e293b;
+    --notelist-bg: #111827;
+    --notelist-border: #1e293b;
+    --editor-bg: #0b0f19;
+    --editor-border: #1e293b;
+
+    /* Card & Active States */
+    --card-bg: #1e293b;
+    --card-border: #334155;
+    --card-active-bg: rgba(99, 102, 241, 0.18);
+    --card-active-border: #6366f1;
+
+    /* Brand & Accent */
     --color-primary: #6366f1;
     --color-primary-light: #818cf8;
     --color-primary-dark: #4f46e5;
     --color-secondary: #a855f7;
-    --color-accent: #22d3ee;
+    --text-accent: #818cf8;
 
-    /* Background gradients */
-    --bg-gradient-start: #0f0c29;
-    --bg-gradient-mid: #302b63;
-    --bg-gradient-end: #24243e;
-
-    /* Text */
+    /* Text Hierarchy */
     --text-primary: #f8fafc;
-    --text-secondary: #cbd5e1;
-    --text-muted: #94a3b8;
-    --text-link: #a5b4fc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
 
-    /* Glass morphism */
-    --glass-bg: rgba(255, 255, 255, 0.07);
-    --glass-bg-hover: rgba(255, 255, 255, 0.11);
-    --glass-border: rgba(255, 255, 255, 0.18);
-    --glass-border-strong: rgba(255, 255, 255, 0.28);
-    --glass-blur: 20px;
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-    --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.45);
+    /* Button Tokens */
+    --btn-primary-bg: #4f46e5;
+    --btn-primary-hover: #4338ca;
+    --btn-primary-text: #ffffff;
 
-    /* Form elements */
-    --input-bg: rgba(255, 255, 255, 0.06);
-    --input-border: rgba(255, 255, 255, 0.14);
-    --input-border-focus: rgba(99, 102, 241, 0.65);
-    --input-placeholder: rgba(148, 163, 184, 0.85);
-
-    /* Status colors */
-    --color-success: #34d399;
-    --color-success-bg: rgba(52, 211, 153, 0.12);
-    --color-error: #f87171;
-    --color-error-bg: rgba(248, 113, 113, 0.12);
-    --color-warning: #fbbf24;
-    --color-warning-bg: rgba(251, 191, 36, 0.12);
-
-    /* Spacing & radius */
-    --radius-sm: 0.5rem;
-    --radius-md: 0.75rem;
-    --radius-lg: 1rem;
-    --radius-xl: 1.25rem;
-    --radius-2xl: 1.5rem;
-
-    /* Transitions */
-    --transition-fast: 150ms ease;
-    --transition-base: 250ms ease;
-    --transition-slow: 400ms ease;
-
-    /* Typography */
-    --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+    /* Window Controls */
+    --dot-red: #ef4444;
+    --dot-yellow: #f59e0b;
+    --dot-green: #10b981;
 }

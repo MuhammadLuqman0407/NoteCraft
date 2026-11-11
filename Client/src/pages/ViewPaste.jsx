@@ -1,49 +1,46 @@
-import { useParams, useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { removeFromPastes } from '../redux/pasteSlice'
-import { toast } from 'react-hot-toast'
-import { useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 function ViewPaste() {
-   const {id} = useParams();
-   const navigate = useNavigate();
-   const allPastes = useSelector((state) => state.paste.pastes);
-   const paste = allPastes.filter((p)=> p.id === id)[0];
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const allPastes = useSelector((state) => state.paste.pastes);
+  const paste = allPastes.find((p) => p.id === id);
 
-   // Handle case where paste doesn't exist
-   useEffect(() => {
-     if (!paste) {
-       navigate('/404', { replace: true });
-     }
-   }, [paste, navigate]);
+  // Handle case where paste doesn't exist
+  useEffect(() => {
+    if (!paste) {
+      navigate('/404', { replace: true });
+    }
+  }, [paste, navigate]);
 
-   // Show loading or redirect if paste doesn't exist
-   if (!paste) {
-     return null; // This will be replaced by the redirect
-   }
+  if (!paste) {
+    return null;
+  }
 
   return (
-   <div>
-        <div className='flex flex-row gap-5 place-content-between'>
-          <input 
-            className='p-2 rounded-md mt-2 w-[100%] pl-5'
-            type="text"
-            placeholder='Enter Title Here....'
-            value={paste.title || ''} disabled
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <div className='mt-5'>
-          <textarea
-            className='rounded-md mt-0 min-w-[500px] p-4 border-gray-500'
-            value={paste.content || ''}
-            placeholder='Enter the Content here.....' disabled
-            onChange={(e) => setValue(e.target.value)}
-            rows={20}
-          />
-        </div>
-   </div>
-  )
+    <div className="w-full max-w-4xl mx-auto space-y-4">
+      <div className="flex flex-row gap-5 place-content-between">
+        <input
+          className="p-3 rounded-xl bg-slate-900 border border-slate-700 w-full text-slate-100 font-medium"
+          type="text"
+          placeholder="Enter Title Here...."
+          value={paste.title || ''}
+          disabled
+        />
+      </div>
+      <div>
+        <textarea
+          className="w-full rounded-xl p-4 bg-slate-900 border border-slate-700 text-slate-200 outline-none"
+          value={paste.content || ''}
+          placeholder="Enter the Content here....."
+          disabled
+          rows={16}
+        />
+      </div>
+    </div>
+  );
 }
 
-export default ViewPaste
+export default ViewPaste;
