@@ -19,14 +19,17 @@ const taskSchema = new mongoose.Schema(
 
         description: {
             type: String,
+            trim: true,
+            maxlength: 5000,
             default: "",
         },
 
         // Task priority
         priority: {
             type: String,
-            enum: ["low", "medium", "high"],
+            enum: ["low", "medium", "high", "urgent"],
             default: "medium",
+            index: true,
         },
 
         // Task completion
@@ -34,6 +37,7 @@ const taskSchema = new mongoose.Schema(
             type: String,
             enum: ["pending", "in-progress", "completed"],
             default: "pending",
+            index: true,
         },
 
         // Task deadline
@@ -50,6 +54,16 @@ const taskSchema = new mongoose.Schema(
             },
         ],
 
+        dueDate: {
+            type: Date,
+            default: null,
+        },
+
+        // Task completion date
+        completedAt: {
+            type: Date,
+            default: null,
+        },
         // Optional linked note
         noteId: {
             type: mongoose.Schema.Types.ObjectId,
@@ -64,18 +78,28 @@ const taskSchema = new mongoose.Schema(
             default: null,
         },
 
-        completedAt: {
+        tags: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Tag",
+            },
+        ],
+
+        // Optional task reminder
+        reminderAt: {
             type: Date,
             default: null,
         },
+
     },
     {
         timestamps: true,
     }
 );
 
-taskSchema.index({ userId: 1, status: 1 });
-taskSchema.index({ userId: 1, dueDate: 1 });
+taskSchema.index({ userId: 1, status: 1, dueDate: 1 });
+taskSchema.index({ userId: 1, priority: 1 });
+taskSchema.index({ userId: 1, createdAt: -1 });
 
 const taskModel = mongoose.model("Task", taskSchema);
 

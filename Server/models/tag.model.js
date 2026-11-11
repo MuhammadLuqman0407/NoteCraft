@@ -17,9 +17,17 @@ const tagSchema = new mongoose.Schema(
             maxlength: 40,
         },
 
+        normalizedName: {
+            type: String,
+            required: true,
+            trim: true,
+            lowercase: true,
+        },
+
         color: {
             type: String,
             default: "#F97316",
+            match: /^#[0-9A-Fa-f]{6}$/,
         },
 
         description: {

@@ -56,7 +56,7 @@ const noteSchema = new mongoose.Schema(
         // Note state
         status: {
             type: String,
-            enum: ["active", "archived", "trash"],
+            enum: ["active", "archived", "trash"],  // status - {Restore, Archieve, Move to Trash }
             default: "active",
         },
 
@@ -112,6 +112,6 @@ noteSchema.index({ userId: 1, isFavorite: 1 });
 noteSchema.index({ userId: 1, isPinned: 1 });
 noteSchema.index({ userId: 1, updatedAt: -1 });
 
-const Note = mongoose.model("Note", noteSchema);
+const noteModel = mongoose.model("Note", noteSchema);
 
-export default Note;
+export default noteModel;
