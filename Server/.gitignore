@@ -1,0 +1,80 @@
+
+# =====================================
+# ENVIRONMENT VARIABLES AND SECRETS
+# =====================================
+
+.env
+.env.*
+!.env.example
+
+# =====================================
+# NODE.JS DEPENDENCIES
+# =====================================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# =====================================
+# LOG FILES
+# =====================================
+
+logs/
+*.log
+log.txt
+
+# =====================================
+# BUILD AND DISTRIBUTION
+# =====================================
+
+dist/
+build/
+coverage/
+
+# =====================================
+# CACHE AND TEMPORARY FILES
+# =====================================
+
+.cache/
+.tmp/
+temp/
+tmp/
+.eslintcache
+
+# =====================================
+# OPERATING SYSTEM FILES
+# =====================================
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# =====================================
+# EDITORS AND IDE
+# =====================================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =====================================
+# TEST AND DEBUG FILES
+# =====================================
+
+.nyc_output/
+*.test-results
+
+# =====================================
+# OPTIONAL LOCAL DATABASE FILES
+# =====================================
+
+data/
+mongodb-data/
+
+# =====================================
+# OPTIONAL GENERATED FILES
+# =====================================
+
+*.tsbuildinfo
