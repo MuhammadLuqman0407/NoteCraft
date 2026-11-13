@@ -9,16 +9,18 @@ import ViewPaste from './pages/ViewPaste';
 import NotFound from './pages/NotFound';
 import Navbar from './pages/Navbar';
 import Otp from './auth/Otp.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
       <div className="min-h-screen flex flex-col bg-[var(--theme-bg)] text-[var(--text-primary)] transition-colors duration-200">
-        <Navbar />
+        {/* <Navbar />
         <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 pb-12">
           <Home />
-        </main>
+        </main> */}
+        <Dashboard />
       </div>
     ),
   },
